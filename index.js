@@ -80,6 +80,7 @@ const state = {
   members: [],
   filtered: [],
   searchQuery: '',
+  memberSearchQuery: '',
   category: '',
   sortBy: 'updated',
 };
@@ -124,6 +125,8 @@ const dom = {
   memberGrid:    $('#member-grid'),
   searchInput:   $('#search-input'),
   searchClear:   $('#search-clear'),
+  memberSearchInput: $('#member-search-input'),
+  memberSearchClear: $('#member-search-clear'),
   categoryFilter:$('#category-filter'),
   sortFilter:    $('#sort-filter'),
   resultsCount:  $('#results-count'),
@@ -281,6 +284,23 @@ function buildCard(repo, index) {
 
       ${topicsHtml ? `<div class="card__tags">${topicsHtml}</div>` : ''}
 
+      ${(function() {
+        const members = repo.members || [];
+        if (members.length === 0) {
+          return `<p class="card__members-empty">Members not listed</p>`;
+        }
+        let displayMembers = members;
+        let extraCount = 0;
+        if (members.length > 5) {
+          displayMembers = members.slice(0, 3);
+          extraCount = members.length - 3;
+        }
+        return `<ul class="card__members-list">` + 
+          displayMembers.map(m => `<li>${escHtml(m)}</li>`).join('') +
+          (extraCount > 0 ? `<li class="card__members-more">+${extraCount} more</li>` : '') +
+          `</ul>`;
+      })()}
+
       <div class="card__meta">
         <span class="card__stat" title="Stars">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -386,15 +406,20 @@ function escHtml(str) {
 // ── Filter & Sort ───────────────────────────────────────────────
 function applyFilters() {
   const q    = state.searchQuery.toLowerCase();
+  const mq   = state.memberSearchQuery.toLowerCase();
   const cat  = state.category.toLowerCase();
   const sort = state.sortBy;
 
   let results = state.repos.filter(repo => {
     const name = (repo.name + ' ' + (repo.description || '') + ' ' + repo.language).toLowerCase();
     const topics = (repo.topics || []).join(' ').toLowerCase();
+    const membersList = (repo.members || []).join(' ').toLowerCase();
+    
     const matchesSearch = !q || name.includes(q) || topics.includes(q);
+    const matchesMember = !mq || membersList.includes(mq);
     const matchesCat    = !cat || (repo.topics || []).some(t => t.toLowerCase() === cat);
-    return matchesSearch && matchesCat;
+    
+    return matchesSearch && matchesMember && matchesCat;
   });
 
   results = results.slice().sort((a, b) => {
@@ -402,6 +427,16 @@ function applyFilters() {
       case 'stars':   return b.stargazers_count - a.stargazers_count;
       case 'forks':   return b.forks_count      - a.forks_count;
       case 'name':    return a.name.localeCompare(b.name);
+      case 'member-asc': {
+        const memA = (a.members && a.members.length > 0) ? a.members[0].toLowerCase() : 'zzz';
+        const memB = (b.members && b.members.length > 0) ? b.members[0].toLowerCase() : 'zzz';
+        return memA.localeCompare(memB);
+      }
+      case 'member-desc': {
+        const memA = (a.members && a.members.length > 0) ? a.members[0].toLowerCase() : 'zzz';
+        const memB = (b.members && b.members.length > 0) ? b.members[0].toLowerCase() : 'zzz';
+        return memB.localeCompare(memA);
+      }
       case 'updated':
       default:        return new Date(b.updated_at) - new Date(a.updated_at);
     }
@@ -481,21 +516,17 @@ function openModal(repo) {
     topicsSection.hidden = true;
   }
 
-  // Members — show org members as contributors (placeholder per repo)
+  // Members
   const membersSection = $('#modal-members-section');
-  if (state.members.length) {
-    // Show first 8 members as representative contributors
-    dom.modalMembers.innerHTML = state.members.slice(0, 8).map(m => {
-      const initials = getInitials(m.login);
-      const imgHtml = m.avatar_url
-        ? `<img src="${escHtml(m.avatar_url)}" alt="${escHtml(m.login)}" class="modal__member-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
-        : '';
+  const members = repo.members || [];
+  if (members.length) {
+    dom.modalMembers.innerHTML = members.map(m => {
+      const initials = getInitials(m);
       return `
-        <a href="${escHtml(m.html_url)}" target="_blank" rel="noopener noreferrer" class="modal__member-chip" aria-label="GitHub profile of ${escHtml(m.login)}">
-          ${imgHtml}
-          <span class="modal__member-initials" ${m.avatar_url ? 'style="display:none"' : ''}>${initials}</span>
-          ${escHtml(m.login)}
-        </a>
+        <div class="modal__member-chip" aria-label="Member: ${escHtml(m)}">
+          <span class="modal__member-initials">${initials}</span>
+          ${escHtml(m)}
+        </div>
       `;
     }).join('');
     membersSection.hidden = false;
@@ -715,6 +746,28 @@ function bindEvents() {
     applyFilters();
   }
 
+  // Member Search
+  let memberSearchTimer;
+  dom.memberSearchInput.addEventListener('input', e => {
+    state.memberSearchQuery = e.target.value.trim();
+    dom.memberSearchClear.classList.toggle('visible', state.memberSearchQuery.length > 0);
+    clearTimeout(memberSearchTimer);
+    memberSearchTimer = setTimeout(applyFilters, 250);
+  });
+
+  dom.memberSearchClear.addEventListener('click', clearMemberSearch);
+  dom.memberSearchClear.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); clearMemberSearch(); }
+  });
+
+  function clearMemberSearch() {
+    dom.memberSearchInput.value = '';
+    state.memberSearchQuery = '';
+    dom.memberSearchClear.classList.remove('visible');
+    dom.memberSearchInput.focus();
+    applyFilters();
+  }
+
   // Category filter
   dom.categoryFilter.addEventListener('change', e => {
     state.category = e.target.value;
@@ -736,12 +789,15 @@ function bindEvents() {
       return;
     }
     dom.searchInput.value = '';
+    dom.memberSearchInput.value = '';
     dom.categoryFilter.value = '';
     dom.sortFilter.value = 'updated';
     state.searchQuery = '';
+    state.memberSearchQuery = '';
     state.category = '';
     state.sortBy = 'updated';
     dom.searchClear.classList.remove('visible');
+    dom.memberSearchClear.classList.remove('visible');
     applyFilters();
   });
 
@@ -767,18 +823,20 @@ function bindEvents() {
 }
 
 // ── Main Init ───────────────────────────────────────────────────
-// Renders a loaded set of repos + members into the page
-function _applyLoadedData(repos, members, repoCount) {
-  state.repos   = repos;
-  state.members = members;
+// Renders a loaded set of repos into the page
+function _applyLoadedData(repos, githubContributors, repoCount) {
+  state.repos = repos;
   dom.categoryFilter.innerHTML = '<option value="">All Categories</option>';
   populateCategoryFilter(repos);
   renderCards(repos);
   requestAnimationFrame(() => { dom.cardGrid.style.cssText = ''; });
   animateCounter(dom.statRepos,    repoCount ?? repos.length,             900);
-  animateCounter(dom.statMembers,  members.length,                        800);
   animateCounter(dom.statSubjects, extractSubjectsFromTopics(repos),       700);
-  renderMembers(members);
+  
+  // Use GitHub contributors for stats and member grid
+  const contributors = githubContributors || [];
+  animateCounter(dom.statMembers,  contributors.length,                        800);
+  renderMembers(contributors);
 }
 
 function showToast(message, type = 'warning', duration = 5000) {
@@ -820,28 +878,17 @@ function showToast(message, type = 'warning', duration = 5000) {
 async function initData() {
   dom.emptyState.style.display = 'none';
   dom.cardGrid.style.cssText = 'opacity:1;transform:none;transition:none';
-
-  // ───────────────────────────────────────────────────────────
-  // TIER 1 — fresh cache (< 5 min): render instantly, zero API calls
-  // ───────────────────────────────────────────────────────────
-  const cache = getCache();
-  if (cache?.fresh && cache.repos.length > 0) {
-    _applyLoadedData(cache.repos, cache.members, cache.repos.length);
-    return;
-  }
-
-  // ───────────────────────────────────────────────────────────
-  // TIER 2 — live GitHub API
-  // ───────────────────────────────────────────────────────────
   renderSkeletons(6);
-  try {
-    const [orgData, repos] = await Promise.all([fetchOrgData(), fetchRepos()]);
-    state.repos = repos;
 
-    if (repos.length === 0) {
+  try {
+    const res = await fetch('data.json');
+    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+    const data = await res.json();
+    
+    if (data.repos.length === 0) {
       dom.cardGrid.innerHTML = '';
-      if (dom.emptyTitle)   dom.emptyTitle.textContent   = 'No repositories yet';
-      if (dom.emptyMessage) dom.emptyMessage.textContent = 'This organization has no public repositories yet.';
+      if (dom.emptyTitle)   dom.emptyTitle.textContent   = 'No projects yet';
+      if (dom.emptyMessage) dom.emptyMessage.textContent = 'We are still working on adding projects.';
       if (dom.emptyAction)  dom.emptyAction.hidden       = true;
       dom.emptyState.style.display = 'flex';
       dom.resultsCount.textContent = '0 projects';
@@ -851,64 +898,10 @@ async function initData() {
       return;
     }
 
-    // Render repos immediately (no async delay)
-    dom.categoryFilter.innerHTML = '<option value="">All Categories</option>';
-    populateCategoryFilter(repos);
-    renderCards(repos);
-    requestAnimationFrame(() => { dom.cardGrid.style.cssText = ''; });
-    animateCounter(dom.statRepos,    orgData.publicRepos ?? repos.length, 1000);
-    animateCounter(dom.statSubjects, extractSubjectsFromTopics(repos),     800);
-
-    // Fetch contributors non-blocking — save to cache when done
-    (async () => {
-      try {
-        const contributors = await fetchContributors(repos);
-        state.members = contributors;
-        animateCounter(dom.statMembers, contributors.length, 900);
-        renderMembers(contributors);
-        setCache(repos, contributors);
-      } catch {
-        state.members = [];
-        animateCounter(dom.statMembers, 0, 900);
-        renderMembers([]);
-        setCache(repos, []);
-      }
-    })();
-
+    _applyLoadedData(data.repos, data.github_contributors, data.repos.length);
+    
   } catch (err) {
     console.error('[PSU Portfolio]', err);
-
-    // ───────────────────────────────────────────────────────────
-    // TIER 3 — API failed, silently serve stale cache if available
-    // ───────────────────────────────────────────────────────────
-    if (cache?.repos?.length > 0) {
-      // Show cached data silently, but notify user if it's a rate limit
-      _applyLoadedData(cache.repos, cache.members, cache.repos.length);
-      const m = err.message || '';
-      if (m.includes('403') || m.includes('429')) {
-        showToast('API rate limit reached. Showing cached data.', 'warning', 8000);
-      } else {
-        showToast('Unable to reach GitHub. Showing cached data.', 'warning', 6000);
-      }
-      return;
-    }
-
-    // ───────────────────────────────────────────────────────────
-    // TIER 4 — No cache, API failed -> Load static fallback.json
-    // ───────────────────────────────────────────────────────────
-    try {
-      const fallbackRes = await fetch('fallback.json');
-      if (fallbackRes.ok) {
-        const fallbackData = await fallbackRes.json();
-        if (fallbackData.repos && fallbackData.repos.length > 0) {
-          _applyLoadedData(fallbackData.repos, fallbackData.members || [], fallbackData.repos.length);
-          showToast('API unavailable. Showing static backup data.', 'warning', 8000);
-          return;
-        }
-      }
-    } catch (fallbackErr) {
-      console.error('[PSU Portfolio] Fallback failed:', fallbackErr);
-    }
 
     // No cache at all — show clean error state
     state.repos   = [];

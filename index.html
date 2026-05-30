@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="index.css?v=10" />
+  <link rel="stylesheet" href="index.css?v=12" />
 </head>
 <body>
 
@@ -104,6 +104,25 @@
         </div>
       </div>
 
+      <div class="filter-bar__search-wrap">
+        <svg class="filter-bar__search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>
+        </svg>
+        <input
+          type="search"
+          id="member-search-input"
+          class="filter-bar__search"
+          placeholder="Search by member name…"
+          aria-label="Search by member name"
+          autocomplete="off"
+        />
+        <div class="filter-bar__search-clear" id="member-search-clear" aria-label="Clear member search" role="button" tabindex="0">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </div>
+      </div>
+
       <div class="filter-bar__selects">
         <div class="select-wrap">
           <select id="category-filter" class="filter-bar__select" aria-label="Filter by category">
@@ -120,6 +139,8 @@
             <option value="stars">Most Stars</option>
             <option value="forks">Most Forks</option>
             <option value="name">Name A–Z</option>
+            <option value="member-asc">Member Name (A–Z)</option>
+            <option value="member-desc">Member Name (Z–A)</option>
           </select>
           <svg class="select-wrap__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M6 9l6 6 6-6"/>
@@ -333,6 +354,6 @@
     <div class="page-loader__ring"></div>
   </div>
 
-  <script src="index.js?v=11"></script>
+  <script src="index.js?v=12"></script>
 </body>
 </html>
