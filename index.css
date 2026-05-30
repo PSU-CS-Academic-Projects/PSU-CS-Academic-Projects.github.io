@@ -78,6 +78,10 @@
   --nav-height:  64px;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 /* ── 2. Reset & Base ──────────────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -1483,6 +1487,67 @@ input, select { font-family: inherit; }
 .reveal.revealed {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ── 19b. Toast Notifications ───────────────────────────────────── */
+.toast-container {
+  position: fixed;
+  bottom: var(--space-4);
+  right: var(--space-4);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  pointer-events: none;
+}
+
+.toast {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  color: var(--clr-text);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  animation: fadeSlideUp var(--dur-fast) var(--ease) forwards;
+  pointer-events: auto;
+}
+
+.toast.toast--warning {
+  border-color: rgba(255, 215, 0, 0.4);
+}
+
+.toast__icon {
+  width: 16px; 
+  height: 16px; 
+  color: var(--clr-gold); 
+  flex-shrink: 0;
+}
+
+.toast__close {
+  background: none; 
+  border: none; 
+  color: var(--clr-text-faint); 
+  cursor: pointer; 
+  display: flex; 
+  align-items: center; 
+  padding: 2px;
+}
+
+.toast__close:hover { 
+  color: var(--clr-text); 
+}
+
+.toast.hiding {
+  animation: fadeSlideDown var(--dur-fast) var(--ease) forwards;
+}
+
+@keyframes fadeSlideDown {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(28px); }
 }
 
 /* ── 20. Utility ───────────────────────────────────────────────── */

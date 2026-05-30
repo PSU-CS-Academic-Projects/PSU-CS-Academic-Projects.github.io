@@ -142,6 +142,7 @@ const dom = {
   modalMembers:  $('#modal-members'),
   modalActions:  $('#modal-actions'),
   footerYear:    $('#footer-year'),
+  toastContainer:$('#toast-container'),
 };
 
 // ── Utilities ───────────────────────────────────────────────────
@@ -327,7 +328,7 @@ function buildCard(repo, index) {
 }
 
 function renderCards(repos) {
-  dom.emptyState.hidden = true;
+  dom.emptyState.style.display = 'none';
 
   if (repos.length === 0) {
     dom.cardGrid.innerHTML = '';
@@ -348,7 +349,7 @@ function renderCards(repos) {
       };
       dom.emptyAction.hidden = false;
     }
-    dom.emptyState.hidden = false;
+    dom.emptyState.style.display = 'flex';
     dom.resultsCount.textContent = '0 results';
     return;
   }
@@ -780,8 +781,44 @@ function _applyLoadedData(repos, members, repoCount) {
   renderMembers(members);
 }
 
+function showToast(message, type = 'warning', duration = 5000) {
+  if (!dom.toastContainer) return;
+  const toast = document.createElement('div');
+  toast.className = `toast toast--${type}`;
+  toast.innerHTML = `
+    <svg class="toast__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+      <line x1="12" y1="9" x2="12" y2="13"></line>
+      <line x1="12" y1="17" x2="12.01" y2="17"></line>
+    </svg>
+    <span>${message}</span>
+    <button class="toast__close" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  `;
+  
+  dom.toastContainer.appendChild(toast);
+
+  let hideTimeout;
+  
+  const hide = () => {
+    toast.classList.add('hiding');
+    toast.addEventListener('animationend', () => toast.remove());
+  };
+
+  toast.querySelector('.toast__close').addEventListener('click', () => {
+    clearTimeout(hideTimeout);
+    hide();
+  });
+
+  hideTimeout = setTimeout(hide, duration);
+}
+
 async function initData() {
-  dom.emptyState.hidden = true;
+  dom.emptyState.style.display = 'none';
   dom.cardGrid.style.cssText = 'opacity:1;transform:none;transition:none';
 
   // ───────────────────────────────────────────────────────────
@@ -806,7 +843,7 @@ async function initData() {
       if (dom.emptyTitle)   dom.emptyTitle.textContent   = 'No repositories yet';
       if (dom.emptyMessage) dom.emptyMessage.textContent = 'This organization has no public repositories yet.';
       if (dom.emptyAction)  dom.emptyAction.hidden       = true;
-      dom.emptyState.hidden = false;
+      dom.emptyState.style.display = 'flex';
       dom.resultsCount.textContent = '0 projects';
       animateCounter(dom.statRepos,    0, 800);
       animateCounter(dom.statMembers,  0, 700);
@@ -845,9 +882,32 @@ async function initData() {
     // TIER 3 — API failed, silently serve stale cache if available
     // ───────────────────────────────────────────────────────────
     if (cache?.repos?.length > 0) {
-      // Show cached data silently — no error shown to user
+      // Show cached data silently, but notify user if it's a rate limit
       _applyLoadedData(cache.repos, cache.members, cache.repos.length);
+      const m = err.message || '';
+      if (m.includes('403') || m.includes('429')) {
+        showToast('API rate limit reached. Showing cached data.', 'warning', 8000);
+      } else {
+        showToast('Unable to reach GitHub. Showing cached data.', 'warning', 6000);
+      }
       return;
+    }
+
+    // ───────────────────────────────────────────────────────────
+    // TIER 4 — No cache, API failed -> Load static fallback.json
+    // ───────────────────────────────────────────────────────────
+    try {
+      const fallbackRes = await fetch('fallback.json');
+      if (fallbackRes.ok) {
+        const fallbackData = await fallbackRes.json();
+        if (fallbackData.repos && fallbackData.repos.length > 0) {
+          _applyLoadedData(fallbackData.repos, fallbackData.members || [], fallbackData.repos.length);
+          showToast('API unavailable. Showing static backup data.', 'warning', 8000);
+          return;
+        }
+      }
+    } catch (fallbackErr) {
+      console.error('[PSU Portfolio] Fallback failed:', fallbackErr);
     }
 
     // No cache at all — show clean error state
@@ -865,7 +925,7 @@ async function initData() {
       dom.emptyAction._isRetry   = true;
       dom.emptyAction.hidden     = false;
     }
-    dom.emptyState.hidden = false;
+    dom.emptyState.style.display = 'flex';
   }
 }
 
