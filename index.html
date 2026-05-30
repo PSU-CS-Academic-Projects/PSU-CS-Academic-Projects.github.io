@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <meta name="description" content="PSU-CS-Academic-Projects — A curated showcase of Palawan State University Computer Science academic projects. Explore open-source work from our student developer community." />
+  <meta property="og:title" content="PSU CS Academic Projects" />
+  <meta property="og:description" content="Explore open-source academic CS projects from Palawan State University." />
+  <meta property="og:type" content="website" />
+  <title>PSU CS Academic Projects</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════ HERO ═══════ -->
+  <header class="hero" id="hero">
+    <div class="hero__mesh" aria-hidden="true"></div>
+    <div class="hero__noise" aria-hidden="true"></div>
+    <div class="hero__content container">
+      <div class="hero__badge">
+        <span class="badge badge--gold">Open Source</span>
+        <span class="badge badge--outline">Palawan State University</span>
+      </div>
+      <h1 class="hero__title">
+        PSU&nbsp;CS<br />
+        <span class="hero__title--accent">Academic Projects</span>
+      </h1>
+      <p class="hero__tagline">
+        A curated showcase of open-source computer science work<br class="hero__br" />
+        built by student developers at Palawan State University.
+      </p>
+
+      <div class="hero__stats" id="hero-stats">
+        <div class="hero__stat">
+          <span class="hero__stat-number" id="stat-repos">—</span>
+          <span class="hero__stat-label">Projects</span>
+        </div>
+        <div class="hero__stat-divider" aria-hidden="true"></div>
+        <div class="hero__stat">
+          <span class="hero__stat-number" id="stat-members">—</span>
+          <span class="hero__stat-label">Contributors</span>
+        </div>
+        <div class="hero__stat-divider" aria-hidden="true"></div>
+        <div class="hero__stat">
+          <span class="hero__stat-number" id="stat-subjects">—</span>
+          <span class="hero__stat-label">Subjects</span>
+        </div>
+      </div>
+
+      <div class="hero__actions">
+        <a
+          href="https://github.com/PSU-CS-Academic-Projects"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn--gold"
+          id="github-org-btn"
+        >
+          <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+          </svg>
+          GitHub Organization
+        </a>
+        <a href="#projects" class="btn btn--outline">
+          Explore Projects
+          <svg class="btn__icon btn__icon--right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="hero__scroll-hint" aria-hidden="true">
+      <div class="hero__scroll-line"></div>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════ FILTER BAR ════════ -->
+  <div class="filter-bar" id="filter-bar" role="search" aria-label="Filter projects">
+    <div class="container filter-bar__inner">
+      <div class="filter-bar__search-wrap">
+        <svg class="filter-bar__search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="M21 21l-4.35-4.35"/>
+        </svg>
+        <input
+          type="search"
+          id="search-input"
+          class="filter-bar__search"
+          placeholder="Search projects, topics, languages…"
+          aria-label="Search projects"
+          autocomplete="off"
+        />
+        <div class="filter-bar__search-clear" id="search-clear" aria-label="Clear search" role="button" tabindex="0">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="filter-bar__selects">
+        <div class="select-wrap">
+          <select id="category-filter" class="filter-bar__select" aria-label="Filter by category">
+            <option value="">All Categories</option>
+          </select>
+          <svg class="select-wrap__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M6 9l6 6 6-6"/>
+          </svg>
+        </div>
+
+        <div class="select-wrap">
+          <select id="sort-filter" class="filter-bar__select" aria-label="Sort projects">
+            <option value="updated">Recently Updated</option>
+            <option value="stars">Most Stars</option>
+            <option value="forks">Most Forks</option>
+            <option value="name">Name A–Z</option>
+          </select>
+          <svg class="select-wrap__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M6 9l6 6 6-6"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="filter-bar__results" id="results-count" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <main>
+    <!-- ════════════════════════════════════ PROJECTS ═══════════ -->
+    <section class="section" id="projects" aria-labelledby="projects-heading">
+      <div class="container">
+        <div class="section__header reveal">
+          <h2 class="section__title" id="projects-heading">Projects</h2>
+          <p class="section__subtitle">Browse all open-source academic repositories from our organization.</p>
+        </div>
+
+        <div class="card-grid" id="card-grid" role="list" aria-label="Project list">
+          <!-- Skeleton loaders injected by JS -->
+        </div>
+
+        <!-- Unified state: covers no-results, no-repos, and API errors -->
+        <div class="empty-state" id="empty-state" hidden aria-live="polite">
+          <div class="empty-state__icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="28" cy="28" r="20" stroke="#800000" stroke-width="3"/>
+              <path d="M42 42l14 14" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
+              <path d="M20 28h16M28 20v16" stroke="#800000" stroke-width="2.5" stroke-linecap="round" opacity="0.4"/>
+            </svg>
+          </div>
+          <h3 class="empty-state__title" id="empty-title">No projects found</h3>
+          <p class="empty-state__message" id="empty-message">Try adjusting your search or filter criteria.</p>
+          <button class="btn btn--outline" id="empty-action">Clear filters</button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════ MEMBERS ════════════ -->
+    <section class="section section--alt" id="members" aria-labelledby="members-heading">
+      <div class="container">
+        <div class="section__header reveal">
+          <h2 class="section__title" id="members-heading">Contributors</h2>
+          <p class="section__subtitle">The student developers behind these projects.</p>
+        </div>
+        <div class="member-grid" id="member-grid" role="list" aria-label="Contributors list">
+          <!-- Injected by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════ ABOUT ══════════════ -->
+    <section class="section" id="about" aria-labelledby="about-heading">
+      <div class="container">
+        <div class="about-grid reveal">
+          <div class="about-content">
+            <span class="badge badge--maroon about-badge">About Us</span>
+            <h2 class="section__title" id="about-heading" style="margin-top:1rem">Building Tomorrow's<br/>Software Today</h2>
+            <p class="about-text">
+              PSU-CS-Academic-Projects is a GitHub organization dedicated to housing and showcasing the computer science coursework and personal projects of Palawan State University students.
+            </p>
+            <p class="about-text">
+              We believe in open-source learning — sharing code, collaborating across courses, and building a portfolio that speaks louder than a résumé.
+            </p>
+            <div class="about-pillars">
+              <div class="about-pillar">
+                <span class="about-pillar__icon">🎓</span>
+                <div>
+                  <strong>Academic Integrity</strong>
+                  <p>Projects built with honesty and rigor inside Palawan State University's CS curriculum.</p>
+                </div>
+              </div>
+              <div class="about-pillar">
+                <span class="about-pillar__icon">🤝</span>
+                <div>
+                  <strong>Collaboration First</strong>
+                  <p>Cross-course, cross-semester peer learning and review.</p>
+                </div>
+              </div>
+              <div class="about-pillar">
+                <span class="about-pillar__icon">🚀</span>
+                <div>
+                  <strong>Career-Ready Code</strong>
+                  <p>Real portfolios for real interviews — open for the world to see.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="about-visual reveal">
+            <div class="about-card">
+              <div class="about-card__line">
+                <span class="about-card__dot about-card__dot--gold"></span>
+                <code>git init <span class="about-card__comment"># start something great</span></code>
+              </div>
+              <div class="about-card__line">
+                <span class="about-card__dot about-card__dot--maroon"></span>
+                <code>git add . <span class="about-card__comment"># add your work</span></code>
+              </div>
+              <div class="about-card__line">
+                <span class="about-card__dot about-card__dot--green"></span>
+                <code>git commit -m <span class="about-card__string">"feat: build the future"</span></code>
+              </div>
+              <div class="about-card__line">
+                <span class="about-card__dot about-card__dot--blue"></span>
+                <code>git push origin main</code>
+              </div>
+              <div class="about-card__line about-card__line--output">
+                <span class="about-card__prompt">✓</span>
+                <code class="about-card__success">Successfully pushed to PSU-CS-Academic-Projects</code>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ════════════════════════════════════════ FOOTER ══════════ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <div class="footer__logo">
+          <span class="footer__logo-psu">PSU</span>
+          <span class="footer__logo-cs">CS</span>
+        </div>
+        <p class="footer__tagline">Academic Projects — Open Source by Design.</p>
+        <a
+          href="https://github.com/PSU-CS-Academic-Projects"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="footer__github"
+          aria-label="GitHub Organization"
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+          </svg>
+          github.com/PSU-CS-Academic-Projects
+        </a>
+      </div>
+
+      <nav class="footer__nav" aria-label="Footer navigation">
+        <div class="footer__nav-col">
+          <h3 class="footer__nav-heading">Explore</h3>
+          <ul class="footer__nav-list">
+            <li><a href="#projects" class="footer__link">Projects</a></li>
+            <li><a href="#members" class="footer__link">Contributors</a></li>
+            <li><a href="#about" class="footer__link">About</a></li>
+          </ul>
+        </div>
+        <div class="footer__nav-col">
+          <h3 class="footer__nav-heading">Resources</h3>
+          <ul class="footer__nav-list">
+            <li><a href="https://github.com/PSU-CS-Academic-Projects" target="_blank" rel="noopener noreferrer" class="footer__link">GitHub Org</a></li>
+            <li><a href="https://www.psu.palawan.edu.ph" target="_blank" rel="noopener noreferrer" class="footer__link">Palawan State University</a></li>
+            <li><a href="https://www.psu.palawan.edu.ph" target="_blank" rel="noopener noreferrer" class="footer__link">CS Department</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <span class="footer__copy">© <span id="footer-year"></span> PSU-CS-Academic-Projects. Open source, always.</span>
+        <div class="footer__bottom-badges">
+          <span class="badge badge--outline badge--xs">MIT License</span>
+          <span class="badge badge--outline badge--xs">GitHub Pages</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════ MODAL ════════════ -->
+  <div class="modal-backdrop" id="modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal" id="modal">
+      <button class="modal__close" id="modal-close" aria-label="Close project details">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <div class="modal__header">
+        <div class="modal__header-badges" id="modal-badges"></div>
+        <h2 class="modal__title" id="modal-title"></h2>
+        <p class="modal__description" id="modal-description"></p>
+      </div>
+
+      <div class="modal__meta" id="modal-meta"></div>
+
+      <div class="modal__section" id="modal-topics-section">
+        <h3 class="modal__section-title">Technologies &amp; Topics</h3>
+        <div class="modal__tags" id="modal-tags"></div>
+      </div>
+
+      <div class="modal__section" id="modal-members-section">
+        <h3 class="modal__section-title">Contributors</h3>
+        <div class="modal__members" id="modal-members"></div>
+      </div>
+
+      <div class="modal__actions" id="modal-actions"></div>
+    </div>
+  </div>
+
+  <!-- Loading overlay -->
+  <div class="page-loader" id="page-loader" aria-hidden="true">
+    <div class="page-loader__ring"></div>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+</html>
