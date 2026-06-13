@@ -824,7 +824,7 @@ function bindEvents() {
 
 // ── Main Init ───────────────────────────────────────────────────
 // Renders a loaded set of repos into the page
-function _applyLoadedData(repos, githubContributors, repoCount) {
+function _applyLoadedData(repos, repoCount) {
   state.repos = repos;
   dom.categoryFilter.innerHTML = '<option value="">All Categories</option>';
   populateCategoryFilter(repos);
@@ -833,10 +833,16 @@ function _applyLoadedData(repos, githubContributors, repoCount) {
   animateCounter(dom.statRepos,    repoCount ?? repos.length,             900);
   animateCounter(dom.statSubjects, extractSubjectsFromTopics(repos),       700);
   
-  // Use GitHub contributors for stats and member grid
-  const contributors = githubContributors || [];
-  animateCounter(dom.statMembers,  contributors.length,                        800);
-  renderMembers(contributors);
+  // Aggregate unique members for the stat counter and member grid
+  const allMembers = new Set();
+  repos.forEach(r => (r.members || []).forEach(m => allMembers.add(m)));
+  animateCounter(dom.statMembers,  allMembers.size,                        800);
+  
+  // Create mock member objects for the member grid using the README members
+  const memberObjects = Array.from(allMembers).map((name, i) => ({
+    id: i, login: name, avatar_url: '', html_url: '#'
+  }));
+  renderMembers(memberObjects);
 }
 
 function showToast(message, type = 'warning', duration = 5000) {
@@ -898,7 +904,7 @@ async function initData() {
       return;
     }
 
-    _applyLoadedData(data.repos, data.github_contributors, data.repos.length);
+    _applyLoadedData(data.repos, data.repos.length);
     
   } catch (err) {
     console.error('[PSU Portfolio]', err);

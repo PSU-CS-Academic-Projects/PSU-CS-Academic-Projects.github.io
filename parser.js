@@ -102,36 +102,7 @@ async function run() {
       }
     }
 
-    // Fetch GitHub contributors for the "Top Contributors" section
-    console.log('Fetching GitHub contributors...');
-    let githubContributors = [];
-    try {
-      const members = await fetchAllPages(`/orgs/${ORG}/public_members`);
-      if (members.length > 0) {
-        githubContributors = members.map(m => ({ login: m.login, avatar_url: m.avatar_url, html_url: m.html_url }));
-      } else {
-        throw new Error('No public members found, falling back to repo contributors');
-      }
-    } catch (e) {
-      console.warn('  Failed to fetch org members, falling back to top contributors.');
-      const topRepos = repos.slice().sort((a, b) => b.stargazers_count - a.stargazers_count).slice(0, 8);
-      const contributorMap = new Map();
-      for (const repo of topRepos) {
-        try {
-          const contributors = await fetchAllPages(`/repos/${ORG}/${repo.name}/contributors`);
-          for (const c of contributors) {
-            if (c.type === 'User' && !contributorMap.has(c.login)) {
-              contributorMap.set(c.login, { login: c.login, avatar_url: c.avatar_url, html_url: c.html_url });
-            }
-          }
-        } catch (err) {
-          // ignore
-        }
-      }
-      githubContributors = Array.from(contributorMap.values());
-    }
-
-    const fallbackData = { repos, github_contributors: githubContributors };
+    const fallbackData = { repos };
     fs.writeFileSync(path.join(__dirname, 'data.json'), JSON.stringify(fallbackData, null, 2));
     console.log('Successfully wrote data.json');
     
