@@ -66,8 +66,8 @@ async function fetchAllPages(endpoint) {
 // Extract members from README markdown
 function parseMembers(readmeContent) {
   if (!readmeContent) return [];
-  // Find the ### Members section
-  const membersMatch = readmeContent.match(/###\s*Members\s*\n([\s\S]*?)(?=\n##|\n---|$(?![\r\n]))/i);
+  // Find the ### Members or ### Contributors section, allowing for emojis or extra words like "### 👥 Contributors"
+  const membersMatch = readmeContent.match(/###.*(?:Members|Contributors).*\n([\s\S]*?)(?=\n##|\n---|$(?![\r\n]))/i);
   if (!membersMatch) return [];
 
   const membersBlock = membersMatch[1];
