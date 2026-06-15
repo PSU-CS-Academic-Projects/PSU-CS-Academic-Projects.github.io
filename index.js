@@ -815,6 +815,14 @@ function bindEvents() {
     applyFilters();
   });
 
+  // Subject filter
+  if (dom.subjectFilter) {
+    dom.subjectFilter.addEventListener('change', e => {
+      state.subject = e.target.value;
+      applyFilters();
+    });
+  }
+
   // Sort filter
   dom.sortFilter.addEventListener('change', e => {
     state.sortBy = e.target.value;
@@ -826,16 +834,19 @@ function bindEvents() {
     // Default action is clear-filters; may be overridden to Retry by initData
     if (dom.emptyAction._isRetry) {
       dom.categoryFilter.innerHTML = '<option value="">All Categories</option>';
+      if (dom.subjectFilter) dom.subjectFilter.value = '';
       initData();
       return;
     }
     dom.searchInput.value = '';
     dom.memberSearchInput.value = '';
     dom.categoryFilter.value = '';
+    if (dom.subjectFilter) dom.subjectFilter.value = '';
     dom.sortFilter.value = 'updated';
     state.searchQuery = '';
     state.memberSearchQuery = '';
     state.category = '';
+    state.subject = '';
     state.sortBy = 'updated';
     dom.searchClear.classList.remove('visible');
     dom.memberSearchClear.classList.remove('visible');
