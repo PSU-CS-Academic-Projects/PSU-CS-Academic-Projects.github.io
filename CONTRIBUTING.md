@@ -51,7 +51,6 @@ Each repository must include a completed `README.md` file.
 
 **Strongly Recommended:**
 * Live demo link
-* Documentation
 * Video demonstration
 * Future improvements
 
