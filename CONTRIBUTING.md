@@ -45,7 +45,7 @@ Each repository must include a completed `README.md` file.
 * Feature list
 * Installation guide
 * Screenshots
-* Team member information
+* Members/Contributors
 * Academic year
 * Subject information
 
