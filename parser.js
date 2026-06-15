@@ -80,6 +80,17 @@ function parseMembers(readmeContent) {
   return members;
 }
 
+// Extract Video Demonstration link from README markdown
+function parseVideoDemo(readmeContent) {
+  if (!readmeContent) return null;
+  const match = readmeContent.match(/###.*(?:Video Demonstration|Video Demo).*\n([\s\S]*?)(?=\n##|\n---|$(?![\r\n]))/i);
+  if (!match) return null;
+  
+  const block = match[1];
+  const urlMatch = block.match(/https?:\/\/[^\s\)]+/);
+  return urlMatch ? urlMatch[0] : null;
+}
+
 async function run() {
   console.log(`Fetching public repos for ${ORG}...`);
   try {
@@ -93,12 +104,15 @@ async function run() {
         if (readmeData && readmeData.download_url) {
           const readmeContent = await fetchText(readmeData.download_url);
           repo.members = parseMembers(readmeContent);
+          repo.video_demo = parseVideoDemo(readmeContent);
         } else {
           repo.members = [];
+          repo.video_demo = null;
         }
       } catch (e) {
         console.warn(`  Failed to get README for ${repo.name}: ${e.message}`);
         repo.members = [];
+        repo.video_demo = null;
       }
     }
 

@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="index.css?v=14" />
+  <link rel="stylesheet" href="index.css?v=15" />
 </head>
 <body>
 
@@ -127,6 +127,17 @@
         <div class="select-wrap">
           <select id="category-filter" class="filter-bar__select" aria-label="Filter by category">
             <option value="">All Categories</option>
+          </select>
+          <svg class="select-wrap__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M6 9l6 6 6-6"/>
+          </svg>
+        </div>
+
+        <div class="select-wrap">
+          <select id="subject-filter" class="filter-bar__select" aria-label="Filter by subject">
+            <option value="">All Subjects</option>
+            <option value="wst">Web System and Technology (WST)</option>
+            <option value="sia">System Integration Architecture (SIA)</option>
           </select>
           <svg class="select-wrap__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M6 9l6 6 6-6"/>
@@ -354,6 +365,6 @@
     <div class="page-loader__ring"></div>
   </div>
 
-  <script src="index.js?v=14"></script>
+  <script src="index.js?v=15"></script>
 </body>
 </html>

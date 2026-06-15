@@ -9,13 +9,23 @@ const ORG = 'PSU-CS-Academic-Projects';
 const GITHUB_API = 'https://api.github.com';
 const HEADERS = { Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' };
 
-// Language → color mapping
 const LANG_COLORS = {
-  JavaScript: '#f7df1e', TypeScript: '#3178c6', Python: '#3572a5',
-  Java: '#b07219', C: '#555555', 'C++': '#f34b7d', 'C#': '#178600',
-  Go: '#00add8', Rust: '#dea584', Ruby: '#701516', HTML: '#e34c26',
-  CSS: '#563d7c', Shell: '#89e051', Kotlin: '#a97bff', Swift: '#fa7343',
-  PHP: '#4f5d95', Scala: '#c22d40', R: '#276dc3', MATLAB: '#e16737',
+  JavaScript: '#f1e05a',
+  Python: '#3572A5',
+  Java: '#b07219',
+  'C++': '#f34b7d',
+  HTML: '#e34c26',
+  CSS: '#563d7c',
+  TypeScript: '#3178c6',
+  Go: '#00ADD8',
+  PHP: '#4F5D95',
+  Ruby: '#701516',
+  Rust: '#dea584'
+};
+
+const SUBJECT_MAP = {
+  'wst': 'Web System and Technology',
+  'sia': 'System Integration Architecture'
 };
 
 // Fallback static data if API fails
@@ -77,12 +87,12 @@ const FALLBACK_MEMBERS = [];
 // ── State ───────────────────────────────────────────────────────
 const state = {
   repos: [],
-  members: [],
-  filtered: [],
+  members: [], // Flattened list of member objects if needed
   searchQuery: '',
   memberSearchQuery: '',
   category: '',
-  sortBy: 'updated',
+  subject: '',
+  sortBy: 'updated'
 };
 
 // ── LocalStorage Cache ───────────────────────────────────────
@@ -125,10 +135,11 @@ const dom = {
   memberGrid:    $('#member-grid'),
   searchInput:   $('#search-input'),
   searchClear:   $('#search-clear'),
-  memberSearchInput: $('#member-search-input'),
-  memberSearchClear: $('#member-search-clear'),
-  categoryFilter:$('#category-filter'),
-  sortFilter:    $('#sort-filter'),
+  memberSearchInput: document.getElementById('member-search-input'),
+  memberSearchClear: document.getElementById('member-search-clear'),
+  categoryFilter: document.getElementById('category-filter'),
+  subjectFilter: document.getElementById('subject-filter'),
+  sortFilter:    document.getElementById('sort-filter'),
   resultsCount:  $('#results-count'),
   filterBar:     $('#filter-bar'),
   statRepos:     $('#stat-repos'),
@@ -184,10 +195,9 @@ function getLangColor(lang) {
 
 function extractSubjectsFromTopics(repos) {
   const subjects = new Set();
-  const coursePattern = /^(cmpsc|cmpen|cse|ece|ist)-?\d+/i;
   repos.forEach(r => {
     (r.topics || []).forEach(t => {
-      if (coursePattern.test(t)) subjects.add(t.toUpperCase());
+      if (t === 'wst' || t === 'sia') subjects.add(t);
     });
   });
   return subjects.size;
@@ -197,12 +207,13 @@ function extractCategories(repos) {
   const cats = new Set();
   repos.forEach(r => {
     (r.topics || []).forEach(t => {
-      if (!/^(cmpsc|cmpen|cse|ece|ist)-?\d+/i.test(t)) {
+      // Ignore subjects and the old course pattern if any
+      if (t !== 'wst' && t !== 'sia' && !/^(cmpsc|cmpen|cse|ece|ist)-?\d+/i.test(t)) {
         cats.add(t);
       }
     });
   });
-  return [...cats].sort();
+  return Array.from(cats).sort();
 }
 
 // ── Counter Animation ───────────────────────────────────────────
@@ -335,8 +346,20 @@ function buildCard(repo, index) {
             Live Demo
           </a>
         ` : ''}
+        ${repo.video_demo ? `
+          <a
+            href="${escHtml(repo.video_demo)}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn--gold btn--sm"
+            aria-label="Video Demonstration for ${escHtml(repo.name)}"
+            onclick="event.stopPropagation()"
+          >
+            Video Demo
+          </a>
+        ` : ''}
         <button
-          class="btn btn--outline btn--sm ${!repo.homepage ? 'flex-full' : ''}"
+          class="btn btn--outline btn--sm ${!(repo.homepage || repo.video_demo) ? 'flex-full' : ''}"
           data-repo-id="${repo.id}"
           aria-label="View details for ${escHtml(repo.name)}"
         >
@@ -405,25 +428,32 @@ function escHtml(str) {
 
 // ── Filter & Sort ───────────────────────────────────────────────
 function applyFilters() {
-  const q    = state.searchQuery.toLowerCase();
-  const mq   = state.memberSearchQuery.toLowerCase();
-  const cat  = state.category.toLowerCase();
-  const sort = state.sortBy;
+  let filtered = state.repos.filter(r => {
+    const q = state.searchQuery.toLowerCase();
+    const mq = state.memberSearchQuery.toLowerCase();
+    
+    // Match project name or description
+    const matchesSearch = !q || 
+      (r.name && r.name.toLowerCase().includes(q)) || 
+      (r.description && r.description.toLowerCase().includes(q));
 
-  let results = state.repos.filter(repo => {
-    const name = (repo.name + ' ' + (repo.description || '') + ' ' + repo.language).toLowerCase();
-    const topics = (repo.topics || []).join(' ').toLowerCase();
-    const membersList = (repo.members || []).join(' ').toLowerCase();
-    
-    const matchesSearch = !q || name.includes(q) || topics.includes(q);
-    const matchesMember = !mq || membersList.includes(mq);
-    const matchesCat    = !cat || (repo.topics || []).some(t => t.toLowerCase() === cat);
-    
-    return matchesSearch && matchesMember && matchesCat;
+    // Match member name
+    const matchesMember = !mq || 
+      (r.members && r.members.some(m => m.toLowerCase().includes(mq)));
+
+    // Match category
+    const matchesCategory = !state.category || 
+      (r.topics && r.topics.includes(state.category));
+
+    // Match subject
+    const matchesSubject = !state.subject ||
+      (r.topics && r.topics.includes(state.subject));
+
+    return matchesSearch && matchesMember && matchesCategory && matchesSubject;
   });
 
-  results = results.slice().sort((a, b) => {
-    switch (sort) {
+  filtered = filtered.slice().sort((a, b) => {
+    switch (state.sortBy) {
       case 'stars':   return b.stargazers_count - a.stargazers_count;
       case 'forks':   return b.forks_count      - a.forks_count;
       case 'name':    return a.name.localeCompare(b.name);
@@ -448,7 +478,7 @@ function applyFilters() {
   dom.cardGrid.style.transition = 'opacity 180ms ease, transform 180ms ease';
 
   setTimeout(() => {
-    renderCards(results);
+    renderCards(filtered);
     dom.cardGrid.style.opacity = '1';
     dom.cardGrid.style.transform = 'translateY(0)';
   }, 180);
@@ -508,9 +538,11 @@ function openModal(repo) {
   // Topics / tags
   const topicsSection = $('#modal-topics-section');
   if (topics.length) {
-    dom.modalTags.innerHTML = topics.map(t =>
-      `<span class="badge badge--tag">${escHtml(t)}</span>`
-    ).join('');
+    dom.modalTags.innerHTML = (repo.topics || []).map(t => {
+            let displayTopic = t;
+            if (SUBJECT_MAP[t]) displayTopic = SUBJECT_MAP[t];
+            return `<span class="card__tag">${escHtml(displayTopic)}</span>`;
+          }).join('');
     topicsSection.hidden = false;
   } else {
     topicsSection.hidden = true;
@@ -544,6 +576,15 @@ function openModal(repo) {
           <line x1="10" y1="14" x2="21" y2="3"/>
         </svg>
         Live Demo
+      </a>
+    ` : ''}
+    ${repo.video_demo ? `
+      <a href="${escHtml(repo.video_demo)}" target="_blank" rel="noopener noreferrer" class="btn btn--gold">
+        <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <polygon points="23 7 16 12 23 17 23 7"></polygon>
+          <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+        </svg>
+        Video Demo
       </a>
     ` : ''}
     <a href="${escHtml(repo.html_url)}" target="_blank" rel="noopener noreferrer" class="btn btn--outline">
