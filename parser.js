@@ -67,7 +67,7 @@ async function fetchAllPages(endpoint) {
 function parseMembers(readmeContent) {
   if (!readmeContent) return [];
   // Find the ### Members or ### Contributors section, allowing for emojis or extra words like "### 👥 Contributors"
-  const membersMatch = readmeContent.match(/###.*(?:Members|Contributors).*\n([\s\S]*?)(?=\n##|\n---|$(?![\r\n]))/i);
+  const membersMatch = readmeContent.match(/(?:^|\n)[#\s*]*(?:👥\s*)?(?:Members|Contributors)[*:\s]*\n([\s\S]*?)(?=\n#{1,6}[ \t]+|\n\*\*[A-Za-z]|\n---|$(?![\r\n]))/i);
   if (!membersMatch) return [];
 
   const membersBlock = membersMatch[1];
@@ -83,12 +83,42 @@ function parseMembers(readmeContent) {
 // Extract Video Demonstration link from README markdown
 function parseVideoDemo(readmeContent) {
   if (!readmeContent) return null;
-  const match = readmeContent.match(/###.*(?:Video Demonstration|Video Demo).*\n([\s\S]*?)(?=\n##|\n---|$(?![\r\n]))/i);
+  const match = readmeContent.match(/(?:^|\n)[#\s*]*(?:Video Demonstration|Video Demo)[*:\s]*\n([\s\S]*?)(?=\n#{1,6}[ \t]+|\n\*\*[A-Za-z]|\n---|$(?![\r\n]))/i);
   if (!match) return null;
   
   const block = match[1];
   const urlMatch = block.match(/https?:\/\/[^\s\)]+/);
   return urlMatch ? urlMatch[0] : null;
+}
+
+// Extract screenshots from README markdown
+function parseScreenshots(readmeContent, repoName, defaultBranch) {
+  if (!readmeContent) return [];
+  const match = readmeContent.match(/(?:^|\n)[#\s*]*(?:Screenshots)[*:\s]*\n([\s\S]*?)(?=\n#{1,6}[ \t]+|\n\*\*[A-Za-z]|\n---|$(?![\r\n]))/i);
+  if (!match) return [];
+  
+  const block = match[1];
+  const screenshots = [];
+  
+  const processUrl = (url) => {
+    if (url.startsWith('http://') || url.startsWith('https://')) return url;
+    const cleanUrl = url.replace(/^\/+/, '');
+    return `https://raw.githubusercontent.com/${ORG}/${repoName}/${defaultBranch || 'main'}/${cleanUrl}`;
+  };
+
+  const mdRegex = /!\[.*?\]\((.*?)\)/g;
+  let mdMatch;
+  while ((mdMatch = mdRegex.exec(block)) !== null) {
+    screenshots.push(processUrl(mdMatch[1]));
+  }
+  
+  const htmlRegex = /<img.*?src=["'](.*?)["']/gi;
+  let htmlMatch;
+  while ((htmlMatch = htmlRegex.exec(block)) !== null) {
+    screenshots.push(processUrl(htmlMatch[1]));
+  }
+  
+  return screenshots;
 }
 
 async function run() {
@@ -115,14 +145,17 @@ async function run() {
           const readmeContent = await fetchText(readmeData.download_url);
           repo.members = parseMembers(readmeContent);
           repo.video_demo = parseVideoDemo(readmeContent);
+          repo.screenshots = parseScreenshots(readmeContent, repo.name, repo.default_branch);
         } else {
           repo.members = [];
           repo.video_demo = null;
+          repo.screenshots = [];
         }
       } catch (e) {
         console.warn(`  Failed to get README for ${repo.name}: ${e.message}`);
         repo.members = [];
         repo.video_demo = null;
+        repo.screenshots = [];
       }
     }
 

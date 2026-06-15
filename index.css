@@ -1877,3 +1877,17 @@ input, select { font-family: inherit; }
     transition-duration: 0.01ms !important;
   }
 }
+
+.modal__screenshots {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.modal__screenshot {
+  width: 100%;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  object-fit: cover;
+  aspect-ratio: 16/9;
+}

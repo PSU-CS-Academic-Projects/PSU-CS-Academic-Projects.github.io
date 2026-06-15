@@ -152,6 +152,7 @@ const dom = {
   modalDesc:     $('#modal-description'),
   modalBadges:   $('#modal-badges'),
   modalMeta:     $('#modal-meta'),
+  modalSubject:  $('#modal-subject'),
   modalTags:     $('#modal-tags'),
   modalMembers:  $('#modal-members'),
   modalActions:  $('#modal-actions'),
@@ -257,7 +258,10 @@ function renderSkeletons(count = 6) {
 function buildCard(repo, index) {
   const delay = Math.min(index * 50, 600);
   const topics = repo.topics || [];
-  const topicsHtml = topics.slice(0, 4).map(t =>
+  const subjectTopic = topics.find(t => SUBJECT_MAP[t]);
+  const otherTopics = topics.filter(t => !SUBJECT_MAP[t]);
+
+  const topicsHtml = otherTopics.slice(0, 4).map(t =>
     `<span class="badge badge--tag">${escHtml(t)}</span>`
   ).join('');
   const langColor = repo.language ? getLangColor(repo.language) : null;
@@ -292,6 +296,8 @@ function buildCard(repo, index) {
       <p class="card__description">
         ${repo.description ? escHtml(repo.description) : '<em style="opacity:0.5">No description provided.</em>'}
       </p>
+
+      ${subjectTopic ? `<div class="card__tags" style="margin-bottom: 0.5rem;"><span class="badge badge--tag">${escHtml(SUBJECT_MAP[subjectTopic])}</span></div>` : ''}
 
       ${topicsHtml ? `<div class="card__tags">${topicsHtml}</div>` : ''}
 
@@ -535,17 +541,36 @@ function openModal(repo) {
     </div>
   `;
 
+  // Subject
+  const subjectTopic = topics.find(t => SUBJECT_MAP[t]);
+  const subjectSection = $('#modal-subject-section');
+  if (subjectTopic) {
+    dom.modalSubject.innerHTML = `<span class="badge badge--tag">${escHtml(SUBJECT_MAP[subjectTopic])}</span>`;
+    subjectSection.hidden = false;
+  } else {
+    subjectSection.hidden = true;
+  }
+
   // Topics / tags
+  const otherTopics = topics.filter(t => !SUBJECT_MAP[t]);
   const topicsSection = $('#modal-topics-section');
-  if (topics.length) {
-    dom.modalTags.innerHTML = (repo.topics || []).map(t => {
-            let displayTopic = t;
-            if (SUBJECT_MAP[t]) displayTopic = SUBJECT_MAP[t];
-            return `<span class="card__tag">${escHtml(displayTopic)}</span>`;
-          }).join('');
+  if (otherTopics.length) {
+    dom.modalTags.innerHTML = otherTopics.map(t =>
+      `<span class="badge badge--tag">${escHtml(t)}</span>`
+    ).join('');
     topicsSection.hidden = false;
   } else {
     topicsSection.hidden = true;
+  }
+
+  // Screenshots
+  const screenshotsSection = $('#modal-screenshots-section');
+  const domScreenshots = $('#modal-screenshots');
+  if (repo.screenshots && repo.screenshots.length > 0) {
+    domScreenshots.innerHTML = repo.screenshots.map(url => `<img src="${escHtml(url)}" class="modal__screenshot" alt="Screenshot" loading="lazy" referrerpolicy="no-referrer" style="border-radius: var(--radius-md); border: 1px solid var(--border-color); width: 100%; object-fit: cover; aspect-ratio: 16/9; margin-bottom: 1rem;">`).join('');
+    screenshotsSection.hidden = false;
+  } else {
+    screenshotsSection.hidden = true;
   }
 
   // Members
