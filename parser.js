@@ -94,8 +94,18 @@ function parseVideoDemo(readmeContent) {
 async function run() {
   console.log(`Fetching public repos for ${ORG}...`);
   try {
-    const repos = await fetchAllPages(`/orgs/${ORG}/repos?sort=updated&type=public`);
-    console.log(`Found ${repos.length} repos. Fetching READMEs...`);
+    let repos = await fetchAllPages(`/orgs/${ORG}/repos?sort=updated&type=public`);
+    
+    // Deduplicate by repo id and filter out forks
+    const seen = new Set();
+    repos = repos.filter(r => {
+      if (r.fork) return false;
+      if (seen.has(r.id)) return false;
+      seen.add(r.id);
+      return true;
+    });
+
+    console.log(`Found ${repos.length} unique repos. Fetching READMEs...`);
 
     for (const repo of repos) {
       console.log(`  Parsing ${repo.name}...`);
