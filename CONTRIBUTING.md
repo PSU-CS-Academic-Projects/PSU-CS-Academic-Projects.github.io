@@ -86,4 +86,4 @@ Include images of your project under a `### Screenshots` heading. You can use re
 ## 4. Updates & Caching
 The showcase website uses a static data system. Once your repository is public and properly formatted, it will automatically appear on the website the next time the organization's automation script is run by an administrator.
 
-For complete requirements, please review `PROJECT_SUBMISSION_GUIDE.md` (if available).
+For complete requirements, please review `PROJECT_SUBMISSION_GUIDE.md`.
