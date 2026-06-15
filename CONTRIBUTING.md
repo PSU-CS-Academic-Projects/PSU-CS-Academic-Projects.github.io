@@ -53,7 +53,6 @@ Each repository must include a completed `README.md` file.
 * Live demo link
 * Documentation
 * Video demonstration
-* Presentation slides
 * Future improvements
 
 ### Auto-Parser Formatting
