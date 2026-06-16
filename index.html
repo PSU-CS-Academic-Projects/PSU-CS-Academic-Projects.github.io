@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="index.css?v=17" />
+  <link rel="stylesheet" href="index.css?v=23" />
 </head>
 <body>
 
@@ -375,6 +375,17 @@
     <div class="page-loader__ring"></div>
   </div>
 
-  <script src="index.js?v=21"></script>
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lightbox__close" id="lightbox-close" aria-label="Close lightbox">&times;</button>
+    <button class="lightbox__prev" id="lightbox-prev" aria-label="Previous image">&#10094;</button>
+    <div class="lightbox__content">
+      <img src="" alt="Screenshot Preview" id="lightbox-img" class="lightbox__img">
+    </div>
+    <button class="lightbox__next" id="lightbox-next" aria-label="Next image">&#10095;</button>
+    <div class="lightbox__counter" id="lightbox-counter"></div>
+  </div>
+
+  <script src="index.js?v=24"></script>
 </body>
 </html>

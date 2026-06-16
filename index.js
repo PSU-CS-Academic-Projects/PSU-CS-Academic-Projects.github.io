@@ -92,7 +92,9 @@ const state = {
   memberSearchQuery: '',
   category: '',
   subject: '',
-  sortBy: 'updated'
+  sortBy: 'updated',
+  currentScreenshots: [],
+  currentScreenshotIndex: 0
 };
 
 // ── LocalStorage Cache ───────────────────────────────────────
@@ -567,9 +569,40 @@ function openModal(repo) {
   const screenshotsSection = $('#modal-screenshots-section');
   const domScreenshots = $('#modal-screenshots');
   if (repo.screenshots && repo.screenshots.length > 0) {
-    domScreenshots.innerHTML = repo.screenshots.map(url => `<img src="${escHtml(url)}" class="modal__screenshot" alt="Screenshot" loading="lazy" referrerpolicy="no-referrer" style="border-radius: var(--radius-md); border: 1px solid var(--border-color); width: 100%; object-fit: cover; aspect-ratio: 16/9; margin-bottom: 1rem;">`).join('');
+    state.currentScreenshots = repo.screenshots;
+    
+    // Always remove any previously added view-all button
+    const oldBtn = $('#view-all-screenshots-btn');
+    if (oldBtn) oldBtn.remove();
+
+    const limit = 4;
+    const initialScreenshots = repo.screenshots.slice(0, limit);
+    
+    const renderImages = (urls) => {
+      return urls.map((url, index) => `<img src="${escHtml(url)}" class="modal__screenshot" data-index="${index}" alt="Screenshot" loading="lazy" referrerpolicy="no-referrer" style="border-radius: var(--radius-md); border: 1px solid var(--border-color); width: 100%; object-fit: cover; aspect-ratio: 16/9; margin-bottom: 1rem;">`).join('');
+    };
+
+    domScreenshots.innerHTML = renderImages(initialScreenshots);
+    
+    if (repo.screenshots.length > limit) {
+      const btn = document.createElement('button');
+      btn.id = 'view-all-screenshots-btn';
+      btn.className = 'btn btn--outline';
+      btn.style.width = '100%';
+      btn.style.marginTop = '1rem';
+      btn.textContent = `View all ${repo.screenshots.length} screenshots in gallery`;
+      
+      btn.addEventListener('click', () => {
+        // Alternatively, just open the lightbox directly instead of dumping them all in the modal!
+        openLightbox(0);
+      });
+      
+      screenshotsSection.appendChild(btn);
+    }
+    
     screenshotsSection.hidden = false;
   } else {
+    state.currentScreenshots = [];
     screenshotsSection.hidden = true;
   }
 
@@ -1026,4 +1059,69 @@ document.addEventListener('DOMContentLoaded', () => {
       dom.loader?.classList.add('hidden');
     }, 400);
   });
+});
+
+// ── Lightbox Logic ──────────────────────────────────────────
+const domLightbox = document.getElementById('lightbox');
+const domLightboxImg = document.getElementById('lightbox-img');
+const domLightboxClose = document.getElementById('lightbox-close');
+const domLightboxPrev = document.getElementById('lightbox-prev');
+const domLightboxNext = document.getElementById('lightbox-next');
+const domLightboxCounter = document.getElementById('lightbox-counter');
+
+function updateLightbox() {
+  if (state.currentScreenshots.length === 0) return;
+  // Ensure the image loads properly using the exact original URL string.
+  domLightboxImg.src = state.currentScreenshots[state.currentScreenshotIndex];
+  domLightboxCounter.textContent = `${state.currentScreenshotIndex + 1} / ${state.currentScreenshots.length}`;
+}
+
+function openLightbox(index) {
+  state.currentScreenshotIndex = index;
+  updateLightbox();
+  domLightbox.hidden = false;
+}
+
+function closeLightbox() {
+  domLightbox.hidden = true;
+}
+
+function nextLightboxImage() {
+  if (state.currentScreenshots.length === 0) return;
+  state.currentScreenshotIndex = (state.currentScreenshotIndex + 1) % state.currentScreenshots.length;
+  updateLightbox();
+}
+
+function prevLightboxImage() {
+  if (state.currentScreenshots.length === 0) return;
+  state.currentScreenshotIndex = (state.currentScreenshotIndex - 1 + state.currentScreenshots.length) % state.currentScreenshots.length;
+  updateLightbox();
+}
+
+domLightboxClose.addEventListener('click', closeLightbox);
+domLightboxNext.addEventListener('click', (e) => { e.stopPropagation(); nextLightboxImage(); });
+domLightboxPrev.addEventListener('click', (e) => { e.stopPropagation(); prevLightboxImage(); });
+
+// Close on backdrop click
+domLightbox.addEventListener('click', (e) => {
+  if (e.target === domLightbox || e.target.classList.contains('lightbox__content')) {
+    closeLightbox();
+  }
+});
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+  if (!domLightbox.hidden) {
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') nextLightboxImage();
+    if (e.key === 'ArrowLeft') prevLightboxImage();
+  }
+});
+
+// Event delegation for opening lightbox from modal screenshots
+document.getElementById('modal-screenshots').addEventListener('click', (e) => {
+  if (e.target.classList.contains('modal__screenshot')) {
+    const idx = parseInt(e.target.getAttribute('data-index'), 10);
+    openLightbox(idx);
+  }
 });
