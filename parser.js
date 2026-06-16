@@ -63,41 +63,56 @@ async function fetchAllPages(endpoint) {
   return results;
 }
 
-// Extract members from README markdown
+function extractSection(readmeContent, sectionKeywords) {
+  if (!readmeContent) return null;
+  // Match the header, capturing the number of '#'s
+  const headerRegex = new RegExp(`(?:^|\\n)([#]{0,6})[ \\t]*(?:👥\\s*)?(?:${sectionKeywords})[*:\\s]*\\n`, 'i');
+  const headerMatch = readmeContent.match(headerRegex);
+  if (!headerMatch) return null;
+  
+  let headingLevel = headerMatch[1].length;
+  if (headingLevel === 0) headingLevel = 6; // If no #, stop at any heading (1-6)
+  
+  const startIndex = headerMatch.index + headerMatch[0].length;
+  const restOfContent = readmeContent.slice(startIndex);
+  
+  // Stop at a heading of the same or higher level (fewer or equal #)
+  const stopRegex = new RegExp(`\\n[#]{1,${headingLevel}}[ \\t]+[A-Za-z]`);
+  const stopMatch = restOfContent.match(stopRegex);
+  
+  return stopMatch ? restOfContent.slice(0, stopMatch.index) : restOfContent;
+}
+
+// Extract members/contributors from README markdown
 function parseMembers(readmeContent) {
-  if (!readmeContent) return [];
-  // Find the ### Members or ### Contributors section, allowing for emojis or extra words like "### 👥 Contributors"
-  const membersMatch = readmeContent.match(/(?:^|\n)[#\s*]*(?:👥\s*)?(?:Members|Contributors)[*:\s]*\n([\s\S]*?)(?=\n#{1,6}[ \t]+|\n\*\*[A-Za-z]|\n---|$(?![\r\n]))/i);
-  if (!membersMatch) return [];
+  const block = extractSection(readmeContent, 'Members|Contributors');
+  if (!block) return [];
 
-  const membersBlock = membersMatch[1];
-  const members = membersBlock
-    .split('\n')
-    .filter(line => line.trim().startsWith('*') || line.trim().startsWith('-'))
-    .map(line => line.replace(/^[\*\-]\s*/, '').trim())
-    .filter(name => name.length > 0);
-
+  const members = [];
+  const listRegex = /^[*-]\s+(.+)$/gm;
+  let match;
+  while ((match = listRegex.exec(block)) !== null) {
+    const member = match[1].replace(/<[^>]*>?/gm, '').trim();
+    if (member) members.push(member);
+  }
   return members;
 }
 
 // Extract Video Demonstration link from README markdown
 function parseVideoDemo(readmeContent) {
-  if (!readmeContent) return null;
-  const match = readmeContent.match(/(?:^|\n)[#\s*]*(?:Video Demonstration|Video Demo)[*:\s]*\n([\s\S]*?)(?=\n#{1,6}[ \t]+|\n\*\*[A-Za-z]|\n---|$(?![\r\n]))/i);
-  if (!match) return null;
+  const block = extractSection(readmeContent, 'Video Demonstration|Video Demo');
+  if (!block) return null;
   
-  const block = match[1];
-  const urlMatch = block.match(/https?:\/\/[^\s\)]+/);
-  return urlMatch ? urlMatch[0] : null;
+  const urlRegex = /(https?:\/\/[^\s<]+)/i;
+  const match = block.match(urlRegex);
+  return match ? match[1].replace(/[)\]}>]+$/, '') : null;
 }
 
 // Extract screenshots from README markdown
 function parseScreenshots(readmeContent, repoName, defaultBranch) {
-  if (!readmeContent) return [];
-  const match = readmeContent.match(/(?:^|\n)[#\s*]*(?:Screenshots)[*:\s]*\n([\s\S]*?)(?=\n#{1,6}[ \t]+|\n\*\*[A-Za-z]|\n---|$(?![\r\n]))/i);
-  if (!match) return [];
+  const block = extractSection(readmeContent, 'Screenshots');
+  if (!block) return [];
   
-  const block = match[1];
   const screenshots = [];
   
   const processUrl = (url) => {
