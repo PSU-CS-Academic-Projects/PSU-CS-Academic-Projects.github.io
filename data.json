@@ -68,14 +68,14 @@
       "releases_url": "https://api.github.com/repos/PSU-CS-Academic-Projects/PSU-CS-Academic-Projects.github.io/releases{/id}",
       "deployments_url": "https://api.github.com/repos/PSU-CS-Academic-Projects/PSU-CS-Academic-Projects.github.io/deployments",
       "created_at": "2026-05-29T23:49:22Z",
-      "updated_at": "2026-07-19T22:31:56Z",
-      "pushed_at": "2026-07-19T22:31:53Z",
+      "updated_at": "2026-07-19T23:33:57Z",
+      "pushed_at": "2026-07-19T23:33:53Z",
       "git_url": "git://github.com/PSU-CS-Academic-Projects/PSU-CS-Academic-Projects.github.io.git",
       "ssh_url": "git@github.com:PSU-CS-Academic-Projects/PSU-CS-Academic-Projects.github.io.git",
       "clone_url": "https://github.com/PSU-CS-Academic-Projects/PSU-CS-Academic-Projects.github.io.git",
       "svn_url": "https://github.com/PSU-CS-Academic-Projects/PSU-CS-Academic-Projects.github.io",
       "homepage": "https://psu-cs-academic-projects.github.io/",
-      "size": 412,
+      "size": 426,
       "stargazers_count": 0,
       "watchers_count": 0,
       "language": "JavaScript",
@@ -343,33 +343,9 @@
         "pull": false
       },
       "custom_properties": {},
-      "members": [
-        "Dianara Kristy D. Garciano",
-        "Ross Ivan T. Venturillo"
-      ],
-      "video_demo": "https://www.youtube.com/watch?v=fc8DUKcnBAI",
-      "screenshots": [
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/home.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/setup.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/consent.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/listings.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/listing_detail.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/requests.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/post_listing.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/post_validate.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/profanity-filter.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/hardcoded.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/image_validate_1.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/image_validate_2.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/message_threads.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/profile_page.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/admin_stat.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/admin_stat_2.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/admin_report_1.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/admin_report_2.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/admin_report_3.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/email_welcome.png"
-      ]
+      "members": [],
+      "video_demo": null,
+      "screenshots": []
     },
     {
       "id": 1269335587,
@@ -483,10 +459,7 @@
         "pull": false
       },
       "custom_properties": {},
-      "members": [
-        "_Nestor Jann Asag_",
-        "_Kim Andrei Padrones_"
-      ],
+      "members": [],
       "video_demo": null,
       "screenshots": []
     },
@@ -968,37 +941,9 @@
         "pull": false
       },
       "custom_properties": {},
-      "members": [
-        "Nestor Jann C. Asag",
-        "Darcy Jay T. Clerigo",
-        "John Paul D. Macanas",
-        "Lawrence F. Magnetico"
-      ],
-      "video_demo": "https://drive.google.com/file/d/1M0QEdlEJu1r_WwlUvKuBO5Yd7MfoLnHu/view",
-      "screenshots": [
-        "https://i.imgur.com/tCkEwjE.png",
-        "https://i.imgur.com/dgLXLMB.png",
-        "https://i.imgur.com/27ceTKI.png",
-        "https://i.imgur.com/eUXd5BP.png",
-        "https://i.imgur.com/LDzH2C7.png",
-        "https://i.imgur.com/PaHoyeB.png",
-        "https://i.imgur.com/XTJAXO5.png",
-        "https://i.imgur.com/ioPZeHk.png",
-        "https://i.imgur.com/oVWx3OI.png",
-        "https://i.imgur.com/tbNT3ve.png",
-        "https://i.imgur.com/kpClEuy.png",
-        "https://i.imgur.com/lukwl1K.png",
-        "https://i.imgur.com/AfOm9PX.png",
-        "https://i.imgur.com/Pkyts97.png",
-        "https://i.imgur.com/gsgizct.png",
-        "https://i.imgur.com/WnH7PBB.png",
-        "https://i.imgur.com/3oNdBmG.png",
-        "https://i.imgur.com/4B1ggAA.png",
-        "https://i.imgur.com/ob1K7Oi.png",
-        "https://i.imgur.com/FQYLwKR.png",
-        "https://i.imgur.com/g4I15qJ.png",
-        "https://i.imgur.com/iJ0WBu9.png"
-      ]
+      "members": [],
+      "video_demo": null,
+      "screenshots": []
     },
     {
       "id": 1217086392,
@@ -1644,20 +1589,9 @@
         "pull": false
       },
       "custom_properties": {},
-      "members": [
-        "Castillo, Kenneth Vincent B.",
-        "Malate, Juan Miguel M."
-      ],
+      "members": [],
       "video_demo": null,
-      "screenshots": [
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Meowy-WebSystems/main/projectsite/static/img/sc/homepage_1.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Meowy-WebSystems/main/projectsite/static/img/sc/homepage_2.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Meowy-WebSystems/main/projectsite/static/img/sc/homepage_3.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Meowy-WebSystems/main/projectsite/static/img/sc/product_grid_1.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Meowy-WebSystems/main/projectsite/static/img/sc/shopping_cart_1.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Meowy-WebSystems/main/projectsite/static/img/sc/checkout_form_1.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Meowy-WebSystems/main/projectsite/static/img/sc/checkout_form_2.png"
-      ]
+      "screenshots": []
     },
     {
       "id": 1265693665,
@@ -1784,23 +1718,9 @@
         "pull": false
       },
       "custom_properties": {},
-      "members": [
-        "Lenneth P. Arenio",
-        "Ricalyn O. Olayvar"
-      ],
-      "video_demo": "https://drive.google.com/drive/folders/1DNIPsDFiV9rynuNyl0adzpnHQGN9kbcd?usp=sharing",
-      "screenshots": [
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Tandikan-Home-Services-Booking-System/main/screenshots/homepage.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Tandikan-Home-Services-Booking-System/main/screenshots/user-pages/Signup.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Tandikan-Home-Services-Booking-System/main/screenshots/user-pages/Login.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Tandikan-Home-Services-Booking-System/main/screenshots/worker-pages/Login.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Tandikan-Home-Services-Booking-System/main/screenshots/admin-pages/Login.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Tandikan-Home-Services-Booking-System/main/screenshots/user-pages/Booking.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Tandikan-Home-Services-Booking-System/main/screenshots/user-pages/BookingHistory.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Tandikan-Home-Services-Booking-System/main/screenshots/worker-pages/Dashboard.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Tandikan-Home-Services-Booking-System/main/screenshots/admin-pages/dashboard.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Tandikan-Home-Services-Booking-System/main/screenshots/admin-pages/ManageWorkers.png"
-      ]
+      "members": [],
+      "video_demo": null,
+      "screenshots": []
     },
     {
       "id": 1253886654,
@@ -2030,19 +1950,9 @@
         "pull": false
       },
       "custom_properties": {},
-      "members": [
-        "Kimly Mark Bron",
-        "Mark Aaron Figueroa"
-      ],
-      "video_demo": "https://drive.google.com/drive/folders/1YWUndjpmKFblZyjYzsfREkPfewZF5rMx?usp=sharing*",
-      "screenshots": [
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Don-Macchiatos/main/screenshots/home.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Don-Macchiatos/main/screenshots/homepage.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Don-Macchiatos/main/screenshots/menu.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Don-Macchiatos/main/screenshots/menus2.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Don-Macchiatos/main/screenshots/cart.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Don-Macchiatos/main/screenshots/contact.png"
-      ]
+      "members": [],
+      "video_demo": null,
+      "screenshots": []
     },
     {
       "id": 1270886187,
@@ -2156,12 +2066,8 @@
         "pull": false
       },
       "custom_properties": {},
-      "members": [
-        "Kimly Mark M. Bron",
-        "Francis Aying",
-        "Mark Aaron Figueroa"
-      ],
-      "video_demo": "https://drive.google.com/drive/folders/1iCnqd9yiJNMbcfYuJ07K9yx_hRKzU93u?usp=sharing",
+      "members": [],
+      "video_demo": null,
       "screenshots": []
     },
     {
@@ -2390,10 +2296,7 @@
         "pull": false
       },
       "custom_properties": {},
-      "members": [
-        "Francis D. Aying",
-        "Mark Jayson D. Galarpe"
-      ],
+      "members": [],
       "video_demo": null,
       "screenshots": []
     }
