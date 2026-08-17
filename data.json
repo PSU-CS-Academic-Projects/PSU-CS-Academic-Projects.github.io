@@ -68,8 +68,8 @@
       "releases_url": "https://api.github.com/repos/PSU-CS-Academic-Projects/PSU-CS-Academic-Projects.github.io/releases{/id}",
       "deployments_url": "https://api.github.com/repos/PSU-CS-Academic-Projects/PSU-CS-Academic-Projects.github.io/deployments",
       "created_at": "2026-05-29T23:49:22Z",
-      "updated_at": "2026-08-17T15:44:48Z",
-      "pushed_at": "2026-08-17T15:44:43Z",
+      "updated_at": "2026-08-17T16:03:22Z",
+      "pushed_at": "2026-08-17T16:03:17Z",
       "git_url": "git://github.com/PSU-CS-Academic-Projects/PSU-CS-Academic-Projects.github.io.git",
       "ssh_url": "git@github.com:PSU-CS-Academic-Projects/PSU-CS-Academic-Projects.github.io.git",
       "clone_url": "https://github.com/PSU-CS-Academic-Projects/PSU-CS-Academic-Projects.github.io.git",
@@ -841,9 +841,20 @@
         "pull": false
       },
       "custom_properties": {},
-      "members": [],
-      "video_demo": null,
-      "screenshots": []
+      "members": [
+        "Lawrence F. Magnetico",
+        "John Paul D. Macanas"
+      ],
+      "video_demo": "https://drive.google.com/file/d/1m2dNcY37kB5gCEnEcjhJyD0_a39fpURt/view",
+      "screenshots": [
+        "https://i.imgur.com/PcFuWBP.png",
+        "https://i.imgur.com/onhYyhe.png",
+        "https://i.imgur.com/WBUEyBE.png",
+        "https://i.imgur.com/nwqnyBr.png",
+        "https://i.imgur.com/Tclallz.png",
+        "https://i.imgur.com/qmZCP8l.png",
+        "https://i.imgur.com/uLo7Z8U.png"
+      ]
     },
     {
       "id": 1274202213,
@@ -957,9 +968,37 @@
         "pull": false
       },
       "custom_properties": {},
-      "members": [],
-      "video_demo": null,
-      "screenshots": []
+      "members": [
+        "Nestor Jann C. Asag",
+        "Darcy Jay T. Clerigo",
+        "John Paul D. Macanas",
+        "Lawrence F. Magnetico"
+      ],
+      "video_demo": "https://drive.google.com/file/d/1M0QEdlEJu1r_WwlUvKuBO5Yd7MfoLnHu/view",
+      "screenshots": [
+        "https://i.imgur.com/tCkEwjE.png",
+        "https://i.imgur.com/dgLXLMB.png",
+        "https://i.imgur.com/27ceTKI.png",
+        "https://i.imgur.com/eUXd5BP.png",
+        "https://i.imgur.com/LDzH2C7.png",
+        "https://i.imgur.com/PaHoyeB.png",
+        "https://i.imgur.com/XTJAXO5.png",
+        "https://i.imgur.com/ioPZeHk.png",
+        "https://i.imgur.com/oVWx3OI.png",
+        "https://i.imgur.com/tbNT3ve.png",
+        "https://i.imgur.com/kpClEuy.png",
+        "https://i.imgur.com/lukwl1K.png",
+        "https://i.imgur.com/AfOm9PX.png",
+        "https://i.imgur.com/Pkyts97.png",
+        "https://i.imgur.com/gsgizct.png",
+        "https://i.imgur.com/WnH7PBB.png",
+        "https://i.imgur.com/3oNdBmG.png",
+        "https://i.imgur.com/4B1ggAA.png",
+        "https://i.imgur.com/ob1K7Oi.png",
+        "https://i.imgur.com/FQYLwKR.png",
+        "https://i.imgur.com/g4I15qJ.png",
+        "https://i.imgur.com/iJ0WBu9.png"
+      ]
     },
     {
       "id": 1217086392,
@@ -1074,9 +1113,17 @@
         "pull": false
       },
       "custom_properties": {},
-      "members": [],
-      "video_demo": null,
-      "screenshots": []
+      "members": [
+        "Vincent Mago",
+        "Gerro Orbiso"
+      ],
+      "video_demo": "https://drive.google.com/drive/folders/1IJsKiWYRfQxNXkULk-ISeJQ7EqpwKEhQ?usp=sharing",
+      "screenshots": [
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/v4rr.github.io/main/screenshot/1.jpg",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/v4rr.github.io/main/screenshot/2.jpg",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/v4rr.github.io/main/screenshot/3.jpg",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/v4rr.github.io/main/screenshot/4.jpg"
+      ]
     },
     {
       "id": 1264155206,
@@ -1191,9 +1238,35 @@
         "pull": false
       },
       "custom_properties": {},
-      "members": [],
-      "video_demo": null,
-      "screenshots": []
+      "members": [
+        "Jophil F. Gulane",
+        "Vougne Froid P. Alis",
+        "Dianara Kristy D. Garciano",
+        "Ross Ivan T. Venturillo"
+      ],
+      "video_demo": "https://www.youtube.com/watch?v=L_SryVYw19Y",
+      "screenshots": [
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/home.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/login.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/register_patient.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/register_doctor.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/patient_dashboard.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/browse_doctors.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/new_consultation.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/consultation_room_patient.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/patient_history.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/prescription_detail.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/patient_profile.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/doctor_dashboard.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/consultation_room_doctor.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/write_prescription.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/prescription_output.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/doctor_history.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/doctor_profile.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/admin_dashboard.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/admin_doctors.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/admin_users.png"
+      ]
     },
     {
       "id": 1264089191,
@@ -1308,9 +1381,30 @@
         "pull": false
       },
       "custom_properties": {},
-      "members": [],
-      "video_demo": null,
-      "screenshots": []
+      "members": [
+        "Jophil F. Gulane",
+        "Vougne Froid P. Alis"
+      ],
+      "video_demo": "https://youtu.be/ks3XPUOArcc",
+      "screenshots": [
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Ascendant-Language-Learning-Game/main/screenshots/main_menu.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Ascendant-Language-Learning-Game/main/screenshots/mode_select.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Ascendant-Language-Learning-Game/main/screenshots/campaign_select.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Ascendant-Language-Learning-Game/main/screenshots/character_select.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Ascendant-Language-Learning-Game/main/screenshots/map.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Ascendant-Language-Learning-Game/main/screenshots/combat.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Ascendant-Language-Learning-Game/main/screenshots/new_discovery.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Ascendant-Language-Learning-Game/main/screenshots/question_prompt.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Ascendant-Language-Learning-Game/main/screenshots/loot_screen.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Ascendant-Language-Learning-Game/main/screenshots/draft_screen.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Ascendant-Language-Learning-Game/main/screenshots/teacher_dashboard.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Ascendant-Language-Learning-Game/main/screenshots/lesson_builder.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Ascendant-Language-Learning-Game/main/screenshots/ai_generator.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Ascendant-Language-Learning-Game/main/screenshots/gameover.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Ascendant-Language-Learning-Game/main/screenshots/graveyard.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Ascendant-Language-Learning-Game/main/screenshots/run_history.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Ascendant-Language-Learning-Game/main/screenshots/leaderboard.png"
+      ]
     },
     {
       "id": 1269189771,
@@ -1424,9 +1518,19 @@
         "pull": false
       },
       "custom_properties": {},
-      "members": [],
-      "video_demo": null,
-      "screenshots": []
+      "members": [
+        "Castillo, Kenneth Vincent",
+        "Malate, Juan Miguel",
+        "Padrones, Kim Andrei"
+      ],
+      "video_demo": "https://drive.google.com/file/d/1nc7r9xAKGjos6ownqkLjMAu1T8q8EzNd/view?usp=drive_link",
+      "screenshots": [
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/SwiftServe-Kiosk/main/OCKS/static/images/Screenshots/get_started_page.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/SwiftServe-Kiosk/main/OCKS/static/images/Screenshots/kiosk_ordering_menu.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/SwiftServe-Kiosk/main/OCKS/static/images/Screenshots/checkout_page.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/SwiftServe-Kiosk/main/OCKS/static/images/Screenshots/order_status_tracker_and_qr_1.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/SwiftServe-Kiosk/main/OCKS/static/images/Screenshots/order_status_tracker_and_qr_2.png"
+      ]
     },
     {
       "id": 1267353619,
@@ -1926,9 +2030,19 @@
         "pull": false
       },
       "custom_properties": {},
-      "members": [],
-      "video_demo": null,
-      "screenshots": []
+      "members": [
+        "Kimly Mark Bron",
+        "Mark Aaron Figueroa"
+      ],
+      "video_demo": "https://drive.google.com/drive/folders/1YWUndjpmKFblZyjYzsfREkPfewZF5rMx?usp=sharing*",
+      "screenshots": [
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Don-Macchiatos/main/screenshots/home.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Don-Macchiatos/main/screenshots/homepage.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Don-Macchiatos/main/screenshots/menu.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Don-Macchiatos/main/screenshots/menus2.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Don-Macchiatos/main/screenshots/cart.png",
+        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Don-Macchiatos/main/screenshots/contact.png"
+      ]
     },
     {
       "id": 1270886187,
@@ -2276,7 +2390,10 @@
         "pull": false
       },
       "custom_properties": {},
-      "members": [],
+      "members": [
+        "Francis D. Aying",
+        "Mark Jayson D. Galarpe"
+      ],
       "video_demo": null,
       "screenshots": []
     }
