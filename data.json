@@ -68,8 +68,8 @@
       "releases_url": "https://api.github.com/repos/PSU-CS-Academic-Projects/PSU-CS-Academic-Projects.github.io/releases{/id}",
       "deployments_url": "https://api.github.com/repos/PSU-CS-Academic-Projects/PSU-CS-Academic-Projects.github.io/deployments",
       "created_at": "2026-05-29T23:49:22Z",
-      "updated_at": "2026-08-17T13:47:53Z",
-      "pushed_at": "2026-08-17T13:47:47Z",
+      "updated_at": "2026-08-17T14:13:49Z",
+      "pushed_at": "2026-08-17T14:13:44Z",
       "git_url": "git://github.com/PSU-CS-Academic-Projects/PSU-CS-Academic-Projects.github.io.git",
       "ssh_url": "git@github.com:PSU-CS-Academic-Projects/PSU-CS-Academic-Projects.github.io.git",
       "clone_url": "https://github.com/PSU-CS-Academic-Projects/PSU-CS-Academic-Projects.github.io.git",
@@ -343,33 +343,9 @@
         "pull": false
       },
       "custom_properties": {},
-      "members": [
-        "Dianara Kristy D. Garciano",
-        "Ross Ivan T. Venturillo"
-      ],
-      "video_demo": "https://www.youtube.com/watch?v=fc8DUKcnBAI",
-      "screenshots": [
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/home.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/setup.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/consent.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/listings.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/listing_detail.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/requests.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/post_listing.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/post_validate.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/profanity-filter.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/hardcoded.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/image_validate_1.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/image_validate_2.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/message_threads.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/profile_page.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/admin_stat.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/admin_stat_2.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/admin_report_1.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/admin_report_2.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/admin_report_3.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/bearcart/main/screenshots/email_welcome.png"
-      ]
+      "members": [],
+      "video_demo": null,
+      "screenshots": []
     },
     {
       "id": 1269335587,
@@ -723,10 +699,8 @@
       },
       "custom_properties": {},
       "members": [],
-      "video_demo": "https://drive.google.com/drive/folders/1koy0HBHjiX0gYPEnScj5W7YxiISHcJJb?usp=sharing",
-      "screenshots": [
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/shelf-master/main/screenshots/login.png"
-      ]
+      "video_demo": null,
+      "screenshots": []
     },
     {
       "id": 1265133686,
@@ -1238,35 +1212,9 @@
         "pull": false
       },
       "custom_properties": {},
-      "members": [
-        "Jophil F. Gulane",
-        "Vougne Froid P. Alis",
-        "Dianara Kristy D. Garciano",
-        "Ross Ivan T. Venturillo"
-      ],
-      "video_demo": "https://www.youtube.com/watch?v=L_SryVYw19Y",
-      "screenshots": [
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/home.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/login.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/register_patient.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/register_doctor.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/patient_dashboard.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/browse_doctors.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/new_consultation.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/consultation_room_patient.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/patient_history.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/prescription_detail.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/patient_profile.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/doctor_dashboard.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/consultation_room_doctor.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/write_prescription.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/prescription_output.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/doctor_history.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/doctor_profile.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/admin_dashboard.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/admin_doctors.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/MediConnect-Online-Consultation-System/main/screenshots/admin_users.png"
-      ]
+      "members": [],
+      "video_demo": null,
+      "screenshots": []
     },
     {
       "id": 1264089191,
@@ -1518,19 +1466,9 @@
         "pull": false
       },
       "custom_properties": {},
-      "members": [
-        "Castillo, Kenneth Vincent",
-        "Malate, Juan Miguel",
-        "Padrones, Kim Andrei"
-      ],
-      "video_demo": "https://drive.google.com/file/d/1nc7r9xAKGjos6ownqkLjMAu1T8q8EzNd/view?usp=drive_link",
-      "screenshots": [
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/SwiftServe-Kiosk/main/OCKS/static/images/Screenshots/get_started_page.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/SwiftServe-Kiosk/main/OCKS/static/images/Screenshots/kiosk_ordering_menu.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/SwiftServe-Kiosk/main/OCKS/static/images/Screenshots/checkout_page.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/SwiftServe-Kiosk/main/OCKS/static/images/Screenshots/order_status_tracker_and_qr_1.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/SwiftServe-Kiosk/main/OCKS/static/images/Screenshots/order_status_tracker_and_qr_2.png"
-      ]
+      "members": [],
+      "video_demo": null,
+      "screenshots": []
     },
     {
       "id": 1267353619,
@@ -1644,20 +1582,9 @@
         "pull": false
       },
       "custom_properties": {},
-      "members": [
-        "Castillo, Kenneth Vincent B.",
-        "Malate, Juan Miguel M."
-      ],
+      "members": [],
       "video_demo": null,
-      "screenshots": [
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Meowy-WebSystems/main/projectsite/static/img/sc/homepage_1.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Meowy-WebSystems/main/projectsite/static/img/sc/homepage_2.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Meowy-WebSystems/main/projectsite/static/img/sc/homepage_3.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Meowy-WebSystems/main/projectsite/static/img/sc/product_grid_1.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Meowy-WebSystems/main/projectsite/static/img/sc/shopping_cart_1.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Meowy-WebSystems/main/projectsite/static/img/sc/checkout_form_1.png",
-        "https://raw.githubusercontent.com/PSU-CS-Academic-Projects/Meowy-WebSystems/main/projectsite/static/img/sc/checkout_form_2.png"
-      ]
+      "screenshots": []
     },
     {
       "id": 1265693665,
